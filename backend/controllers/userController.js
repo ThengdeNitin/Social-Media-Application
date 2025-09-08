@@ -87,6 +87,13 @@ const login = async (req, res) => {
        maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
+    const userResponse = {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      avatar: user.avatar
+    }
+
     res.status(200).json({ success: true, message: "Login successful", user: userResponse, token: token})
 
   } catch (error) {
@@ -98,7 +105,7 @@ const login = async (req, res) => {
 const me = async(req, res) => {
   try {
     
-    const user = await userModel.findById(req.user.select('password'))
+    const user = await userModel.findById(req.user).select('-password')
     if(!user){
       return res.status(404).json({ success: false, message: "User not found"})
     }
