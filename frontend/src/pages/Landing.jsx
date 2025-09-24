@@ -36,9 +36,9 @@ export const Landing = () => {
       <div className="md:flex md:w-1/2 items-center justify-center">
       <Tilt glareEnable={true} glareMaxOpacity={0.45} scale={1.05}>
         <h1>Socials</h1>
-        {/* <img src={image} alt="logo" 
+        <img src={image} alt="logo" 
         className="max-w-2xl mt-6 rotate-3 border rounded-lg border-gray-700 transition-transform duration-500 ease-in-out transform hover:transform-x-2 shadow-xl shadow-black hover:translate-x-2 hidden lg-block"
-        /> */}
+        />
         </Tilt>
       </div>
 
