@@ -38,7 +38,7 @@ export const Register = () => {
     data.append("username", formData.username);
     data.append("email", formData.email);
     data.append("password", formData.password);
-    data.append("image", avatar); 
+    data.append("image", avatar);
 
     try {
       setLoading(true);
@@ -61,8 +61,8 @@ export const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white p-6">
-      <div className="max-w-md w-full p-6 bg-gray-800 rounded-xl shadow-lg">
+    <div className="flex justify-center items-center min-h-screen text-white p-6">
+      <div className="max-w-md w-full p-6 rounded-xl shadow-lg border border-gray-500">
         <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
 
         {errorMsg && <p className="text-red-500 mb-4">{errorMsg}</p>}
@@ -74,7 +74,7 @@ export const Register = () => {
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none"
+            className="w-full p-3 rounded-lg bg-white text-black focus:outline-none"
             required
           />
 
@@ -84,7 +84,7 @@ export const Register = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none"
+            className="w-full p-3 rounded-lg bg-white text-black  focus:outline-none"
             required
           />
 
@@ -94,7 +94,7 @@ export const Register = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none"
+            className="w-full p-3 rounded-lg bg-white text-black  focus:outline-none"
             required
           />
 
@@ -102,14 +102,14 @@ export const Register = () => {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none"
+            className="w-full p-3 rounded-lg bg-white text-black focus:outline-none"
             required
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-bold"
+            className="w-full py-3 bg-[#251469e8] hover:bg-blue-600 rounded-lg font-bold"
           >
             {loading ? "Registering..." : "Register"}
           </button>

@@ -7,6 +7,7 @@ import { PostsPage } from './pages/PostsPage';
 import { AddPost } from './components/AddPost';
 import { Landing } from './pages/Landing'
 import { Register } from './pages/Register'
+import {ForgotPassword} from './pages/ForgotPassword'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           <Route path ='/' element = {<Landing/>}/>
           <Route path = '/register' element = {<Register/>}/>
+          <Route path = '//forgot-password' element = {<ForgotPassword/>}/>
         </Routes>
       )}
     </div>

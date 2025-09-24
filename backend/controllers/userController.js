@@ -121,4 +121,44 @@ const me = async(req, res) => {
   }
 }
 
+
+const forgotPassword = async (req, res) => {
+  try {
+    const { emailOrUsername, newPassword } = req.body;
+
+    if (!emailOrUsername || !newPassword) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required" });
+    }
+
+    // Find user by email or username
+    const user = await userModel.findOne({
+      $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
+    });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update password
+    user.password = hashedPassword;
+    await user.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Password updated successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
+export { forgotPassword };
 export { register, login, me}

@@ -31,7 +31,7 @@ const PostContextProvider = ({ children }) => {
 
   const fetchPostsofLoginUser = async () => {
     try {
-      const { data } = await axios.get(`${backendUrl}/api/posts/x`, {
+      const { data } = await axios.get(`${backendUrl}/api/posts/user-posts`, {
         headers: {
           Authorization: `Bearer ${utoken}`
         }
