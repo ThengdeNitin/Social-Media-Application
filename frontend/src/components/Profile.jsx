@@ -46,7 +46,7 @@ export const Profile = () => {
                 className="relative aspect-w-1 aspect-h-1 rounded-lg overflow-hidden shadow group"
               >
                 <img
-                  src={post.img}
+                  src={post.image}
                   alt="image"
                   className="object-cover w-full h-full"
                 />

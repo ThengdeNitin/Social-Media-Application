@@ -54,7 +54,7 @@ const getPostsByUser = async(req, res) => {
 
 const updatePost = async(req, res) => {
   const { text } = req.body;
-const postId = req.params.id;
+  const postId = req.params.id;
 
 
   try {
@@ -96,73 +96,73 @@ const deletePost = async(req, res) => {
     await post.deleteOne()
 
     return res.status(200).json({ success: true, message: "Post deleted successfully"})
-
+    window.location.reload();
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal Server Error"})
   }
 }
 
-const toggleLike = async(req, res) => {
-  const postId = req.params.id
-  const userId = req.user
+const toggleLike = async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user;
 
   try {
-    
-    const post = await postModel.findById(postId)
-
-    if(!post){
-      return res.status(404).json({ success: false, message: "Post not found"})
+    const post = await postModel.findById(postId);
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" });
     }
 
-    const alreadyLiked = post.likes.includes(userId)
+    const alreadyLiked = post.likes.some(id => id.toString() === userId.toString());
 
-    if(alreadyLiked){
-      post.likes = post.likes.filter(id => id.toString() !== userId.toString())
+    if (alreadyLiked) {
+      post.likes = post.likes.filter(id => id.toString() !== userId.toString());
     } else {
-      post.likes.push(userId)
+      post.likes.push(userId);
     }
 
-    await post.save()
-    return res.status(200).json({ 
-      success: true, 
+    await post.save();
+    return res.status(200).json({
+      success: true,
       message: alreadyLiked ? "Post Unliked" : "Post Liked",
       likes: post.likes.length
-  })
-
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: "Internal Server Error"})
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-}
+};
 
-const addComment = async(req, res) => {
-  const { id: postId} = req.params;
-  const { text } = req.body
-  const userId = req.user
+// ✅ Add Comment
+const addComment = async (req, res) => {
+  const { id: postId } = req.params;
+  const { text } = req.body;
+  const userId = req.user;
 
   try {
-    
-    const post = await postModel.findById(postId)
+    if (!text || text.trim() === "") {
+      return res.status(400).json({ success: false, message: "Comment text is required" });
+    }
 
-    if(!post){
-      return res.status(404).json({ success: false, message: "Post not found"})
+    const post = await postModel.findById(postId);
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" });
     }
 
     post.comments.push({ user: userId, text });
+    await post.save();
 
-    await post.save()
-    return res.status(200).json({ 
-      success: true, 
-      message: "Comment added Successfully",
+    return res.status(200).json({
+      success: true,
+      message: "Comment added successfully",
       comment: post.comments[post.comments.length - 1]
-  })
-
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: "Internal Server Error"})
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-} 
+};
+
 
 
 export { createPost, getPost, getPostsByUser, updatePost, deletePost, toggleLike, addComment}
