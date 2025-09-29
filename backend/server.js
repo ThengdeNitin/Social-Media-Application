@@ -20,10 +20,9 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS
 app.use(
   cors({
-    origin: process.env.VITE_FRONTEND_URL, // Vercel frontend URL
+    origin: process.env.VITE_FRONTEND_URL, 
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
