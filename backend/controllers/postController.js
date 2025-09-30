@@ -1,4 +1,5 @@
 import postModel from "../models/postSchema.js";
+import { uploadToCloudinary } from "../config/multerConfig.js";
 
 const createPost = async (req, res) => {
   try {
