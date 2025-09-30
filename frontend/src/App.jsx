@@ -30,7 +30,7 @@ function App() {
         <Routes>
           <Route path ='/' element = {<Landing/>}/>
           <Route path = '/register' element = {<Register/>}/>
-          <Route path = '//forgot-password' element = {<ForgotPassword/>}/>
+          <Route path = '/forgot-password' element = {<ForgotPassword/>}/>
         </Routes>
       )}
     </div>
