@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { PostContext } from "../context/PostsContext";
 import Sidebar from "../components/SideBar";
 import { FaThumbsUp, FaCommentDots } from "react-icons/fa";
-import { IoSend, IoPersonCircle } from "react-icons/io5";
+import { IoSend, IoPersonCircleOutline, IoClose } from "react-icons/io5";
 import { Profile } from "../components/Profile";
 
 export const PostsPage = () => {
@@ -11,7 +11,7 @@ export const PostsPage = () => {
   const { Allposts, likePosts, postsComments } = useContext(PostContext);
 
   const [comments, setComments] = useState({ text: "" });
-  const [showProfile, setShowProfile] = useState(false); // mobile toggle
+  const [profileOpen, setProfileOpen] = useState(false); // mobile profile drawer toggle
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,39 +28,33 @@ export const PostsPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white">
-
-      {/* Sidebar */}
+      
+      {/* Sidebar for tablet/desktop */}
       <div className="hidden md:block p-3 border-r border-gray-700">
         <Sidebar />
       </div>
 
-      {/* Posts Section */}
-      <div className="flex-1 p-4 md:p-6 overflow-y-auto min-h-screen">
-        {/* Mobile: Profile toggle button */}
-        <div className="md:hidden mb-4 flex justify-end">
-          <button
-            onClick={() => setShowProfile(!showProfile)}
-            className="flex items-center gap-2 px-3 py-2 bg-blue-600 rounded-lg text-white"
-          >
-            <IoPersonCircle className="text-xl" />
-            {showProfile ? "Hide Profile" : "Show Profile"}
-          </button>
-        </div>
+      {/* Mobile Top bar */}
+      <div className="flex md:hidden justify-between items-center p-3 bg-[#0c0620] border-b border-gray-700">
+        <h2 className="text-lg font-bold">Posts</h2>
+        <button
+          onClick={() => setProfileOpen(true)}
+          className="text-2xl"
+          title="Open Profile"
+        >
+          <IoPersonCircleOutline />
+        </button>
+      </div>
 
-        {/* Mobile: Profile section */}
-        {showProfile && (
-          <div className="mb-6">
-            <Profile />
-          </div>
-        )}
-
-        {/* Posts Feed */}
+      {/* Posts Feed */}
+      <div className="flex-1 p-4 md:p-6 overflow-auto">
         <div className="mx-auto space-y-6 max-w-full sm:max-w-screen-sm">
           {Allposts.slice().reverse().map((post, index) => (
             <div
               key={index}
               className="bg-gradient-to-r from-blue-600 to-[#3f2182] rounded-lg shadow p-4 md:p-6"
             >
+              {/* Post Header */}
               <div className="flex items-center space-x-4 mb-3">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-200 overflow-hidden">
                   <img
@@ -72,8 +66,10 @@ export const PostsPage = () => {
                 <h4 className="text-sm md:text-lg font-bold">{post.user.username}</h4>
               </div>
 
+              {/* Post Text */}
               <p className="text-sm md:text-base mb-3">{post.text}</p>
 
+              {/* Post Image */}
               {post.image && (
                 <div className="w-full mb-3">
                   <img
@@ -84,6 +80,7 @@ export const PostsPage = () => {
                 </div>
               )}
 
+              {/* Likes & Comments */}
               <div className="flex flex-wrap gap-6 text-sm md:text-base items-center mb-3">
                 <div
                   onClick={() => likePosts(post._id)}
@@ -99,17 +96,17 @@ export const PostsPage = () => {
                 </div>
               </div>
 
+              {/* Comments Preview */}
               <div className="mb-3">
                 <p className="font-bold text-sm md:text-base mb-1">Comments:</p>
                 <div className="max-h-20 overflow-y-auto space-y-1 text-sm md:text-base">
                   {post.comments.slice(0, 3).map((Comment, idx) => (
-                    <p key={idx} className="text-sm md:text-base">
-                      {Comment.text}
-                    </p>
+                    <p key={idx} className="text-sm md:text-base">{Comment.text}</p>
                   ))}
                 </div>
               </div>
 
+              {/* Comment Input */}
               <form
                 onSubmit={(e) => handleSubmit(e, post._id)}
                 className="flex items-center space-x-2"
@@ -142,10 +139,26 @@ export const PostsPage = () => {
         </div>
       </div>
 
-      {/* Desktop: Profile Section */}
-      <div className="hidden md:block w-1/4 p-4 md:p-6 border-l border-gray-700">
+      {/* Profile Drawer for Mobile */}
+      {profileOpen && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex justify-end">
+          <div className="w-3/4 max-w-sm bg-gradient-to-b from-blue-600 to-[#3f2182] h-full p-4 overflow-auto relative">
+            <button
+              onClick={() => setProfileOpen(false)}
+              className="absolute top-4 right-4 text-2xl"
+            >
+              <IoClose />
+            </button>
+            <Profile />
+          </div>
+        </div>
+      )}
+
+      {/* Profile Section for Desktop/Tablet */}
+      <div className="hidden md:block w-1/4 p-4 md:p-6 border-t md:border-t-0 md:border-l border-gray-700">
         <Profile />
       </div>
+
     </div>
   );
 };
