@@ -60,11 +60,13 @@ export const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen text-white p-6">
-      <div className="max-w-md w-full p-6 rounded-xl shadow-lg border border-gray-500">
-        <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
+    <div className="flex justify-center items-center min-h-screen p-4 bg-gray-900">
+      <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-lg p-6 md:p-8 bg-gray-800 rounded-xl shadow-lg border border-gray-600">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-white mb-6">
+          Register
+        </h2>
 
-        {errorMsg && <p className="text-red-500 mb-4">{errorMsg}</p>}
+        {errorMsg && <p className="text-red-500 mb-4 text-sm sm:text-base">{errorMsg}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -73,7 +75,7 @@ export const Register = () => {
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg bg-white text-black focus:outline-none"
+            className="w-full p-3 sm:p-4 rounded-lg bg-white text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
 
@@ -83,7 +85,7 @@ export const Register = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg bg-white text-black  focus:outline-none"
+            className="w-full p-3 sm:p-4 rounded-lg bg-white text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
 
@@ -93,7 +95,7 @@ export const Register = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg bg-white text-black  focus:outline-none"
+            className="w-full p-3 sm:p-4 rounded-lg bg-white text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
 
@@ -101,23 +103,23 @@ export const Register = () => {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="w-full p-3 rounded-lg bg-white text-black focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded-lg bg-white text-black text-sm sm:text-base focus:outline-none"
             required
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#251469e8] hover:bg-blue-600 rounded-lg font-bold"
+            className="w-full py-3 sm:py-4 bg-[#251469e8] hover:bg-blue-600 rounded-lg font-bold text-sm sm:text-base transition-colors duration-300"
           >
             {loading ? "Registering..." : "Register"}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-gray-400">
+        <p className="mt-4 text-center text-gray-300 text-sm sm:text-base">
           Already have an account?{" "}
           <span
-            className="text-blue-500 cursor-pointer hover:underline"
+            className="text-blue-400 cursor-pointer hover:underline"
             onClick={() => navigate("/")}
           >
             Log In

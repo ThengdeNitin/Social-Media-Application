@@ -26,7 +26,7 @@ export const Navbar = () => {
           className="flex items-center justify-center cursor-pointer"
           onClick={() => navigate("/")}
         >
-          <img src={Logo} alt="logo" className="w-1 2 md:w-14" />
+          <img src={Logo} alt="logo" className="w-12 md:w-14" />
         </div>
 
         <button
@@ -48,17 +48,17 @@ export const Navbar = () => {
       </div>
 
       {menuOpen && (
-        <div className="mt-4 md:hidden flex flex-col space-x-4 w-1/2">
+        <div className="mt-4 md:hidden flex flex-col space-y-4 w-1/2">
           <button
             onClick={handlePostClick}
-            className="flex items-center hover:bg-grey-600 gap-1 space-x-2 py-2 px-4 rounded-lg font-bold text-white w-full justify-center"
+            className="flex items-center hover:bg-gray-600 gap-1 space-x-2 py-2 px-4 rounded-lg font-bold text-white w-full justify-center"
           >
             <IoAddCircleOutline className="text-xl" />
             Add new post
           </button>
           <button
             onClick={handleLogoutClick}
-            className="flex items-center hover:bg-grey-600 gap-1 space-x-2 py-2 px-4 rounded-lg font-bold text-white w-full justify-center"
+            className="flex items-center hover:bg-gray-600 gap-1 space-x-2 py-2 px-4 rounded-lg font-bold text-white w-full justify-center"
           >
             <IoIosLogOut className="text-xl" />
           </button>

@@ -25,50 +25,59 @@ export const AddPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     createPost(text, image);
+    setText("");
+    setImage(null);
+    setImagePreview(null);
   };
 
   return (
-    <div className="p-6 max-w-lg mt-12 h-1/2 mx-auto border border-gray-600 text-white bg-gradient-to-l from-[#13072e] to-[#3f2182] rounded shadow-md">
-      <h2 className="text-lg font-semibold mb-4">New Post</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium">Caption</label>
+    <div className="p-4 sm:p-6 w-full max-w-md sm:max-w-lg lg:max-w-2xl mt-8 mx-auto border border-gray-600 text-white bg-gradient-to-l from-[#13072e] to-[#3f2182] rounded-xl shadow-md">
+      <h2 className="text-lg sm:text-xl font-semibold mb-4">Create a New Post</h2>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Caption Input */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Caption</label>
           <textarea
             onChange={(e) => setText(e.target.value)}
-            className="w-full mt-1 !text-white focus-outlind-none p-2 border rounded"
-            row="4"
+            className="w-full mt-1 p-2 sm:p-3 text-sm sm:text-base rounded bg-transparent border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white resize-none"
+            rows="4"
             value={text}
+            placeholder="What's on your mind?"
             required
           ></textarea>
         </div>
-        <div className="mb-6">
-          <label className="block text-sm font-medium mb-2">Upload Image</label>
 
+        {/* File Upload */}
+        <div>
+          <label className="block text-sm font-medium mb-2">Upload Image</label>
           <input
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 sm:p-3 text-sm sm:text-base rounded bg-white text-black border border-gray-300"
           />
 
+          {/* Preview */}
           {imagePreview && (
             <div className="mt-4">
               <img
                 src={imagePreview}
                 alt="Preview"
-                className="w-full max-h-64 object-cover rounded shadow"
+                className="w-full max-h-72 object-cover rounded-lg shadow-lg"
               />
             </div>
           )}
+        </div>
 
-          <div className="flex justify-end mt-4">
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Submit
-            </button>
-          </div>
+        {/* Submit Button */}
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="px-4 sm:px-6 py-2 sm:py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-bold text-sm sm:text-base transition-colors duration-300"
+          >
+            Post
+          </button>
         </div>
       </form>
     </div>
