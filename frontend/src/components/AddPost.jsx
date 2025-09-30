@@ -41,29 +41,6 @@ export const AddPost = () => {
             required
           ></textarea>
         </div>
-        {/* <div className="mb-4">
-          <label className="block text-sm font-medium">Upload Image</label>
-          <input type="file"
-          accept="image/*"
-          onChange = {handleFileChange}
-          className="w-full mt-1 p-2 border border-gray-300 rounded"
-          />
-          {imagePreview && (
-            <div className="mb-4">
-              <img 
-              src={imagePreview} 
-              alt="Preview"
-              className="w-full h-48 object-cover rounded" 
-              />
-            </div>
-          )}
-
-          <div className="flex justify-end">
-            <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-              Submit
-            </button>
-          </div>
-        </div> */}
         <div className="mb-6">
           <label className="block text-sm font-medium mb-2">Upload Image</label>
 

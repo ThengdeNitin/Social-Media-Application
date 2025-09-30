@@ -79,21 +79,29 @@ const PostContextProvider = ({ children }) => {
     if (image) {
       formData.append("image", image);
     }
+  
     try {
       const { data } = await axios.post(
         `${backendUrl}/api/posts/create`,
         formData,
-        { headers: { Authorization: `Bearer ${utoken}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${utoken}`,
+            "Content-Type": "multipart/form-data",  // 👈 added this
+          },
+        }
       );
+  
       if (data.success) {
         toast.success(data.message);
         fetchAllPosts();
         navigate("/posts");
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
+  
 
   const deletePost = async (id) => {
     try {
