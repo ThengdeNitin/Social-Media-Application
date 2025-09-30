@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 
 export const Profile = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const { userPosts, deletePost, fetchPostsofLoginUser } =
     useContext(PostContext);
 
