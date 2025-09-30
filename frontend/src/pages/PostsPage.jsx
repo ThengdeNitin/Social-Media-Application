@@ -27,20 +27,16 @@ export const PostsPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white">
-      {/* Sidebar */}
-      <div className="hidden md:block md:w-1/4 p-3 border-r border-gray-700">
+      <div className="hidden md:block md:w-2/4 p-3 border-r border-gray-700">
         <Sidebar />
       </div>
-
-      {/* Posts */}
-      <div className="flex-1 p-4 md:p-6 overflow-auto">
+      <div className="flex-1 p-4 md:p-6 !overflow-scroll">
         <div className="mx-auto space-y-6 max-w-full sm:max-w-screen-sm">
           {Allposts.slice().reverse().map((post, index) => (
             <div
               key={index}
               className="bg-gradient-to-r from-blue-600 to-[#3f2182] rounded-lg shadow p-4 md:p-6"
             >
-              {/* User Info */}
               <div className="flex items-center space-x-4 mb-3">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-200 overflow-hidden">
                   <img
