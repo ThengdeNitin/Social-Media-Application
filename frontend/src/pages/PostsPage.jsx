@@ -27,12 +27,11 @@ export const PostsPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white">
-      {/* Sidebar */}
+
       <div className="hidden md:block p-3 border-r border-gray-700">
         <Sidebar />
       </div>
 
-      {/* Posts */}
       <div className="flex-1 p-4 md:p-6 overflow-auto">
         <div className="mx-auto space-y-6 max-w-full sm:max-w-screen-sm">
           {Allposts.slice().reverse().map((post, index) => (
@@ -40,7 +39,6 @@ export const PostsPage = () => {
               key={index}
               className="bg-gradient-to-r from-blue-600 to-[#3f2182] rounded-lg shadow p-4 md:p-6"
             >
-              {/* User Info */}
               <div className="flex items-center space-x-4 mb-3">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-200 overflow-hidden">
                   <img
@@ -52,10 +50,8 @@ export const PostsPage = () => {
                 <h4 className="text-sm md:text-lg font-bold">{post.user.username}</h4>
               </div>
 
-              {/* Post Text */}
               <p className="text-sm md:text-base mb-3">{post.text}</p>
 
-              {/* Post Image */}
               {post.image && (
                 <div className="w-full mb-3">
                   <img
@@ -66,7 +62,6 @@ export const PostsPage = () => {
                 </div>
               )}
 
-              {/* Likes & Comments */}
               <div className="flex flex-wrap gap-6 text-sm md:text-base items-center mb-3">
                 <div
                   onClick={() => likePosts(post._id)}
@@ -82,7 +77,6 @@ export const PostsPage = () => {
                 </div>
               </div>
 
-              {/* Comments Preview */}
               <div className="mb-3">
                 <p className="font-bold text-sm md:text-base mb-1">Comments:</p>
                 <div className="max-h-20 overflow-y-auto space-y-1 text-sm md:text-base">
@@ -94,7 +88,6 @@ export const PostsPage = () => {
                 </div>
               </div>
 
-              {/* Comment Input */}
               <form
                 onSubmit={(e) => handleSubmit(e, post._id)}
                 className="flex items-center space-x-2"
@@ -127,7 +120,6 @@ export const PostsPage = () => {
         </div>
       </div>
 
-      {/* Profile */}
       <div className="w-full md:w-1/4 p-4 md:p-6 border-t md:border-t-0 md:border-l border-gray-700">
         <Profile />
       </div>
