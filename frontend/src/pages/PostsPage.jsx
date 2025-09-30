@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { PostContext } from "../context/PostsContext";
 import Sidebar from "../components/SideBar";
 import { FaThumbsUp, FaCommentDots } from "react-icons/fa";
-import { IoSend } from "react-icons/io5";
+import { IoSend, IoPersonCircle } from "react-icons/io5";
 import { Profile } from "../components/Profile";
 
 export const PostsPage = () => {
@@ -11,6 +11,7 @@ export const PostsPage = () => {
   const { Allposts, likePosts, postsComments } = useContext(PostContext);
 
   const [comments, setComments] = useState({ text: "" });
+  const [showProfile, setShowProfile] = useState(false); // mobile toggle
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,11 +29,32 @@ export const PostsPage = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white">
 
+      {/* Sidebar */}
       <div className="hidden md:block p-3 border-r border-gray-700">
         <Sidebar />
       </div>
 
-      <div className="flex-1 p-4 md:p-6 overflow-auto">
+      {/* Posts Section */}
+      <div className="flex-1 p-4 md:p-6 overflow-y-auto min-h-screen">
+        {/* Mobile: Profile toggle button */}
+        <div className="md:hidden mb-4 flex justify-end">
+          <button
+            onClick={() => setShowProfile(!showProfile)}
+            className="flex items-center gap-2 px-3 py-2 bg-blue-600 rounded-lg text-white"
+          >
+            <IoPersonCircle className="text-xl" />
+            {showProfile ? "Hide Profile" : "Show Profile"}
+          </button>
+        </div>
+
+        {/* Mobile: Profile section */}
+        {showProfile && (
+          <div className="mb-6">
+            <Profile />
+          </div>
+        )}
+
+        {/* Posts Feed */}
         <div className="mx-auto space-y-6 max-w-full sm:max-w-screen-sm">
           {Allposts.slice().reverse().map((post, index) => (
             <div
@@ -120,7 +142,8 @@ export const PostsPage = () => {
         </div>
       </div>
 
-      <div className="w-full md:w-1/4 p-4 md:p-6 border-t md:border-t-0 md:border-l border-gray-700">
+      {/* Desktop: Profile Section */}
+      <div className="hidden md:block w-1/4 p-4 md:p-6 border-l border-gray-700">
         <Profile />
       </div>
     </div>
