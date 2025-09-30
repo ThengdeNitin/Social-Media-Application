@@ -30,6 +30,24 @@ const getPost = async(req, res) => {
   }
 }
 
+const getPostById = async (req, res) => {
+  try {
+    const post = await postModel.findById(req.params.id)
+      .populate('user', 'username avatar');
+    
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" });
+    }
+
+    return res.status(200).json({ success: true, post });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
+
+
 const getPostsByUser = async(req, res) => {
   try {
     const userId = req.user
