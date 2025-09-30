@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/icon.png";
 import axios from "axios";
+
+// Make sure you have VITE_BACKEND_URL in your .env file
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const ForgotPassword = () => {
@@ -25,38 +27,48 @@ export const ForgotPassword = () => {
     setErrorMsg("");
     setSuccessMsg("");
 
+    if (!backendUrl) {
+      setErrorMsg("Backend URL is not configured. Check your .env file.");
+      return;
+    }
+
     try {
       setLoading(true);
+
       const res = await axios.post(
         `${backendUrl}/api/user/forgot-password`,
         formData,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       );
 
       if (res.data.success) {
         setSuccessMsg(res.data.message);
         setTimeout(() => {
-          navigate("/"); 
+          navigate("/"); // Redirect to login page after 2 seconds
         }, 2000);
+      } else {
+        setErrorMsg(res.data.message || "Something went wrong");
       }
     } catch (error) {
-      setErrorMsg(error.response?.data?.message || "Something went wrong");
+      setErrorMsg(
+        error.response?.data?.message || "Something went wrong. Try again later."
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen text-white p-6">
-      <div className="max-w-md w-full p-6 rounded-xl border border-gray-500 shadow-lg">
+    <div className="flex justify-center items-center min-h-screen text-white p-6 bg-gradient-to-br from-[#13072e] to-[#3f2182]">
+      <div className="max-w-md w-full p-6 rounded-xl border border-gray-500 shadow-lg bg-[#1a0f3f]">
         {/* Logo */}
         <div className="flex items-center justify-center mb-6">
           <img src={Logo} alt="Logo" className="w-16 h-16" />
         </div>
 
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Forgot Password
-        </h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Forgot Password</h2>
 
         {errorMsg && <p className="text-red-500 mb-4">{errorMsg}</p>}
         {successMsg && <p className="text-green-500 mb-4">{successMsg}</p>}
