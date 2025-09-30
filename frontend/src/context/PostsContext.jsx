@@ -98,7 +98,7 @@ const PostContextProvider = ({ children }) => {
   const deletePost = async (id) => {
     try {
       const { data } = await axios.delete(
-        `${backendUrl}/api/posts/post/${id}`,
+        `${backendUrl}/api/posts/posts/${id}`,  
         { headers: { Authorization: `Bearer ${utoken}` } }
       );
       if (data.success) {
