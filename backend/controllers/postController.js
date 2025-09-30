@@ -183,4 +183,4 @@ const addComment = async (req, res) => {
 
 
 
-export { createPost, getPost, getPostsByUser, updatePost, deletePost, toggleLike, addComment}
+export { createPost, getPost, getPostsByUser, updatePost, deletePost, toggleLike, addComment, getPostById}

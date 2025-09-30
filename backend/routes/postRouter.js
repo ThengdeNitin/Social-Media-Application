@@ -1,9 +1,8 @@
 import express from 'express'
 import protect from '../middlewares/auth.js'
 import upload from '../middlewares/multer.js'
-import { getPostById } from '../controllers/postController.js';
 
-import { addComment, createPost, deletePost, getPost, getPostsByUser, toggleLike, updatePost } from '../controllers/postController.js'
+import { addComment, createPost, deletePost, getPost, getPostsByUser, toggleLike, updatePost, getPostById } from '../controllers/postController.js'
 
 const postRouter = express.Router()
 
