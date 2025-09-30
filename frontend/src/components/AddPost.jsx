@@ -34,7 +34,7 @@ export const AddPost = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium">Caption</label>
-          <textarea onChange={(e) => setText(e.target.value)} className="w-full mt-1 text-black focus-outlind-none p-2 border rounded" row="4" value={text} required></textarea>
+          <textarea onChange={(e) => setText(e.target.value)} className="w-full mt-1 !text-white focus-outlind-none p-2 border rounded" row="4" value={text} required></textarea>
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium">Upload Image</label>
