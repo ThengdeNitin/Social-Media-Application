@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export const Register = () => {
   const navigate = useNavigate();
 
@@ -14,18 +16,15 @@ export const Register = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle avatar file change
   const handleFileChange = (e) => {
     setAvatar(e.target.files[0]);
   };
 
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,7 +42,7 @@ export const Register = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:3000/api/user/register",
+        `${backendUrl}/api/user/register`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

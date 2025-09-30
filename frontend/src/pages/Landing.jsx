@@ -89,12 +89,12 @@ export const Landing = () => {
           <FaApple className="text-3xl cursor-pointer hover:text-gray-400" />
         </div>
 
-        <a
-          href="/forgot-password"
-          className="block text-center text-sm text-gray-400 mt-4 hover:underline"
+        <div
+          onClick={() => navigate("/forgot-password")}
+          className="block text-center text-sm text-gray-400 mt-4 hover:underline cursor-pointer"
         >
           Forget password?
-        </a>
+        </div>
 
         <div className="mt-6 bg-[#251469e8] text-gray-400 rounded-lg p-4 text-center">
           Don&apos;t have an account?{" "}

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../assets/icon.png";
 import axios from "axios";
 
-// Make sure you have VITE_BACKEND_URL in your .env file
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const ForgotPassword = () => {
@@ -46,7 +45,7 @@ export const ForgotPassword = () => {
       if (res.data.success) {
         setSuccessMsg(res.data.message);
         setTimeout(() => {
-          navigate("/"); // Redirect to login page after 2 seconds
+          navigate("/"); 
         }, 2000);
       } else {
         setErrorMsg(res.data.message || "Something went wrong");
@@ -61,8 +60,8 @@ export const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen text-white p-6 bg-gradient-to-br from-[#13072e] to-[#3f2182]">
-      <div className="max-w-md w-full p-6 rounded-xl border border-gray-500 shadow-lg bg-[#1a0f3f]">
+    <div className="flex justify-center items-center min-h-screen text-white p-6">
+      <div className="max-w-md w-full p-6 rounded-xl border border-gray-500 shadow-lg">
         {/* Logo */}
         <div className="flex items-center justify-center mb-6">
           <img src={Logo} alt="Logo" className="w-16 h-16" />
