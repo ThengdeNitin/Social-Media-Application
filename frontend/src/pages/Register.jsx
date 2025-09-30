@@ -49,7 +49,7 @@ export const Register = () => {
 
       if (res.data.success) {
         alert("User registered successfully!");
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       console.error(error);

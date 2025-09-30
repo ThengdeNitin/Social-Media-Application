@@ -15,7 +15,6 @@ const register = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Avatar image is required' });
     }
 
-    // Upload image buffer to Cloudinary
     const result = await uploadToCloudinary(req.file.buffer, 'avatars');
 
     const existingUser = await userModel.findOne({ email });
@@ -30,7 +29,7 @@ const register = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      avatar: result.secure_url, // Cloudinary URL
+      avatar: result.secure_url, 
     });
 
     await newUser.save();
@@ -53,63 +52,6 @@ const register = async (req, res) => {
   }
 };
 
-
-// const register = async(req,res) => {
-//   try{
-    
-//     const {username, email, password} = req.body;
-
-//     if(!username || !email || !password){
-//       return res.status(401).json({ success: false, message: "All fields required"})
-//     }
-
-//     const avatarDp = req.file?.path;
-
-//     if(!avatarDp){
-//       return res.status(400).json({ success: false, message: "Avatar image is required"})
-//     }
-
-//     const existingUser = await userModel.findOne({ email })
-
-//     if(existingUser){
-//       return res.status(401).json({ success: false, message: "User already exists"})
-//     }
-
-//     const salt = await bcrypt.genSalt(10)
-//     const hashedPassword = await bcrypt.hash(password, salt)
-
-//     const newUser = new userModel({
-//       username,
-//       email,
-//       password: hashedPassword,
-//       avatar: avatarDp
-//     })
-
-//     await newUser.save();
-
-//     const token = jwt.sign({ id: newUser._id, email: newUser.email, name: newUser.name}, process.env.JWT_SECRET, { expiresIn: '7d'})
-
-//     res.cookie('token', token, {
-//       httpOnly: false,
-//       secure:false,
-//       sameSite:'Lax',
-//       maxAge: 7 * 24 * 60 * 60 * 1000
-//     })
-
-//     const userResponse = {
-//       id: newUser._id,
-//       username: newUser.username,
-//       email: newUser.email,
-//       avatar: newUser.avatar
-//     }
-
-//     res.status(201).json({ success: true, message: "User Register successfully", user: userResponse, token: token})
-
-//   } catch(error){
-//     console.log(error)
-//     res.status(500).json({ success: false, message: "Internal Server Error"})
-//   }
-// }
 
 const login = async (req, res) => {
   try {
@@ -184,7 +126,6 @@ const forgotPassword = async (req, res) => {
         .json({ success: false, message: "All fields are required" });
     }
 
-    // Find user by email or username
     const user = await userModel.findOne({
       $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
     });
@@ -195,11 +136,9 @@ const forgotPassword = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
-    // Hash the new password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-    // Update password
     user.password = hashedPassword;
     await user.save();
 
