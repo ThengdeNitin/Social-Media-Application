@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/icon.png";
 import axios from "axios";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export const ForgotPassword = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `/api/user/forgot-password`,
+        `${backendUrl}/api/user/forgot-password`,
         formData,
         { headers: { "Content-Type": "application/json" } }
       );
