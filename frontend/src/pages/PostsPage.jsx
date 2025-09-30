@@ -27,7 +27,7 @@ export const PostsPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white">
-      <div className="hidden md:block md:w-2/4 p-3 border-r border-gray-700">
+      <div className="hidden md:block md:w-4/4 p-3 border-r border-gray-700">
         <Sidebar />
       </div>
       <div className="flex-1 p-4 md:p-6 !overflow-scroll">
