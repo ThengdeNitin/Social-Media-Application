@@ -1,23 +1,33 @@
 import postModel from "../models/postSchema.js";
 
-const createPost = async(req, res) => {
-
-  const { text } = req.body
-  
+const createPost = async (req, res) => {
   try {
+    const { text } = req.body;
+    let imageUrl = null;
+
+    // ✅ If a file exists, upload it to Cloudinary
+    if (req.file) {
+      const result = await uploadToCloudinary(req.file.buffer, "social_media_app");
+      imageUrl = result.secure_url; // Cloudinary URL
+    }
+
+    // ✅ Save post to DB
     const post = await postModel.create({
-       user: req.user,
-       text,
-       image: req.file?.path
-    })
+      user: req.user,
+      text,
+      image: imageUrl,
+    });
 
-    res.status(200).json({ success: true, message: "Post uploaded Successfully", post})
-
+    res.status(201).json({
+      success: true,
+      message: "Post uploaded successfully",
+      post,
+    });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ success: false, message: "Internal Server Error"})
+    console.error("❌ Error creating post:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-}
+};
 
 const getPost = async(req, res) => {
   try {
