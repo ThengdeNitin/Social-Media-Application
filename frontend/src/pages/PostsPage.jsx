@@ -30,74 +30,69 @@ export const PostsPage = () => {
       <div className="hidden md:block p-3 border-r border-gray-700">
         <Sidebar />
       </div>
-      <div className="flex-1 min-h-screen p-4 md:p-6 overflow-y-auto">
-        <div className="mx-auto space-y-6 max-w-full sm:max-w-screen-sm">
+
+      <div className="flex-1 p-3 sm:p-4 md:p-6 overflow-y-auto max-h-screen">
+        <div className="mx-auto space-y-6 w-full sm:max-w-screen-sm">
           {Allposts.slice()
             .reverse()
             .map((post, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-r from-blue-600 to-[#3f2182] rounded-lg shadow p-4 md:p-6"
+                className="bg-gradient-to-r from-blue-600 to-[#3f2182] rounded-lg shadow p-3 sm:p-4 md:p-6"
               >
-                {/* User Header */}
-                <div className="flex items-center space-x-4 mb-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-200 overflow-hidden">
+                <div className="flex items-center space-x-3 sm:space-x-4 mb-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gray-200 overflow-hidden">
                     <img
                       src={post.user.avatar}
                       alt="User Avatar"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h4 className="text-sm md:text-lg font-bold">
+                  <h4 className="text-sm sm:text-base md:text-lg font-bold">
                     {post.user.username}
                   </h4>
                 </div>
 
-                {/* Post Text */}
-                <p className="text-sm md:text-base mb-3">{post.text}</p>
+                <p className="text-xs sm:text-sm md:text-base mb-3">
+                  {post.text}
+                </p>
 
-                {/* Post Image */}
                 {post.image && (
                   <div className="w-full mb-3">
                     <img
                       src={post.image}
                       alt="post"
-                      className="w-full max-h-96 md:max-h-[500px] object-cover rounded-lg"
+                      className="w-full max-h-60 sm:max-h-80 md:max-h-[500px] object-cover rounded-lg"
                     />
                   </div>
                 )}
 
-                {/* Likes & Comments */}
-                <div className="flex flex-wrap gap-6 text-sm md:text-base items-center mb-3">
+                <div className="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm md:text-base items-center mb-3">
                   <div
                     onClick={() => likePosts(post._id)}
-                    className="flex items-center gap-2 cursor-pointer hover:text-blue-400"
+                    className="flex items-center gap-1 sm:gap-2 cursor-pointer hover:text-blue-400"
                   >
-                    <FaThumbsUp className="text-lg md:text-xl" />
+                    <FaThumbsUp className="text-base sm:text-lg md:text-xl" />
                     <span>{post.likes.length} Likes</span>
                   </div>
 
-                  <div className="flex items-center gap-2 cursor-pointer hover:text-green-400">
-                    <FaCommentDots className="text-lg md:text-xl" />
+                  <div className="flex items-center gap-1 sm:gap-2 cursor-pointer hover:text-green-400">
+                    <FaCommentDots className="text-base sm:text-lg md:text-xl" />
                     <span>{post.comments.length} Comments</span>
                   </div>
                 </div>
 
-                {/* Comments Preview */}
                 <div className="mb-3">
-                  <p className="font-bold text-sm md:text-base mb-1">
+                  <p className="font-bold text-xs sm:text-sm md:text-base mb-1">
                     Comments:
                   </p>
-                  <div className="max-h-20 overflow-y-auto space-y-1 text-sm md:text-base">
+                  <div className="max-h-20 overflow-y-auto space-y-1 text-xs sm:text-sm md:text-base">
                     {post.comments.slice(0, 3).map((Comment, idx) => (
-                      <p key={idx} className="text-sm md:text-base">
-                        {Comment.text}
-                      </p>
+                      <p key={idx}>{Comment.text}</p>
                     ))}
                   </div>
                 </div>
 
-                {/* Comment Input */}
                 <form
                   onSubmit={(e) => handleSubmit(e, post._id)}
                   className="flex items-center space-x-2"
@@ -116,11 +111,11 @@ export const PostsPage = () => {
                     name="text"
                     onChange={handleChange}
                     placeholder="Write a comment..."
-                    className="flex-1 px-4 py-2 rounded-full text-sm md:text-base bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm md:text-base bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <button
                     type="submit"
-                    className="p-2 md:p-3 text-xl md:text-2xl rounded-full hover:bg-gray-800"
+                    className="p-2 sm:p-3 text-lg sm:text-xl md:text-2xl rounded-full hover:bg-gray-800"
                   >
                     <IoSend />
                   </button>
@@ -130,8 +125,7 @@ export const PostsPage = () => {
         </div>
       </div>
 
-      {/* Profile */}
-      <div className="w-full md:w-1/4 p-4 md:p-6 border-t md:border-t-0 md:border-l border-gray-700">
+      <div className="w-full md:w-1/4 p-3 sm:p-4 md:p-6 border-t md:border-t-0 md:border-l border-gray-700">
         <Profile />
       </div>
     </div>
