@@ -30,9 +30,7 @@ export const Landing = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen text-white px-4 sm:px-6 lg:px-20 py-6 bg-gray-900">
-
-      {/* Hero Image */}
+    <div className="flex flex-col lg:flex-row items-center justify-center max-h-screen text-white px-4 sm:px-6 lg:px-20 py-6 bg-gray-900">
       <div className="w-full lg:w-1/2 flex justify-center mb-6 lg:mb-0">
         <Tilt glareEnable={true} glareMaxOpacity={0.45} scale={1.05}>
           <img
@@ -43,15 +41,12 @@ export const Landing = () => {
         </Tilt>
       </div>
 
-      {/* Login/Register Form */}
       <div className="flex-1 w-full max-w-md sm:max-w-lg p-4 sm:p-6 md:p-8 rounded-xl border border-gray-500 shadow-lg bg-gray-800">
         
-        {/* Logo */}
         <div className="flex justify-center mb-6">
           <img src={Logo} alt="Logo" className="w-12 h-12 sm:w-16 sm:h-16" />
         </div>
 
-        {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -81,21 +76,18 @@ export const Landing = () => {
           </button>
         </form>
 
-        {/* OR Divider */}
         <div className="flex items-center my-4">
           <hr className="flex-1 border-gray-600" />
           <span className="px-2 text-gray-400 text-sm sm:text-base">OR</span>
           <hr className="flex-1 border-gray-600" />
         </div>
 
-        {/* Social Login */}
         <div className="flex justify-center space-x-6 text-2xl sm:text-3xl mb-4">
           <FaFacebook className="cursor-pointer hover:text-blue-600" />
           <FaGoogle className="cursor-pointer hover:text-red-500" />
           <FaApple className="cursor-pointer hover:text-gray-400" />
         </div>
 
-        {/* Forgot Password */}
         <div
           onClick={() => navigate("/forgot-password")}
           className="text-center text-sm sm:text-base text-gray-400 hover:underline cursor-pointer mb-4"
@@ -103,7 +95,6 @@ export const Landing = () => {
           Forgot password?
         </div>
 
-        {/* Sign Up */}
         <div className="mt-4 bg-[#251469e8] text-gray-400 rounded-lg p-4 text-center text-sm sm:text-base">
           Don&apos;t have an account?{" "}
           <span
@@ -114,7 +105,6 @@ export const Landing = () => {
           </span>
         </div>
 
-        {/* Get the App */}
         <div className="mt-6 text-center">
           <p className="text-sm sm:text-base">Get the app.</p>
           <div className="flex justify-center flex-wrap gap-4 mt-4">

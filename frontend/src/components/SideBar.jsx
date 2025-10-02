@@ -16,7 +16,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center gap-4 p-2 w-44 min-h-screen md:h-[90vh] bg-gradient-to-l from-[#3f2182] to-[#13072e] text-white border-r border-gray-600 rounded -mt-2">
+    <div className="flex flex-col justify-between items-center gap-4 p-2 w-44 max-h-screen md:h-[90vh] bg-gradient-to-l from-[#3f2182] to-[#13072e] text-white border-r border-gray-600 rounded -mt-2">
       {/* Top Links */}
       <div className="flex flex-col gap-3 text-lg">
         <div

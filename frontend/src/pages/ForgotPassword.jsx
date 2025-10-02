@@ -63,7 +63,6 @@ export const ForgotPassword = () => {
     <div className="flex justify-center items-center min-h-screen text-white px-4 sm:px-6 lg:px-20 py-6 bg-gray-900">
       <div className="w-full max-w-md sm:max-w-lg p-4 sm:p-6 md:p-8 rounded-xl border border-gray-500 shadow-lg bg-gray-800">
 
-        {/* Logo */}
         <div className="flex justify-center mb-6">
           <img src={Logo} alt="Logo" className="w-12 h-12 sm:w-16 sm:h-16" />
         </div>
